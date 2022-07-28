@@ -6,15 +6,11 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 15:18:40 by yichoi            #+#    #+#              #
-#    Updated: 2022/07/28 00:30:13 by yichoi           ###   ########.fr        #
+#    Updated: 2022/07/28 16:20:33 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo
-
-LIBFT		= ./libft
-
-LIBFT_LIB	= libft.a
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -42,21 +38,18 @@ endif
 all : $(NAME)
 
 %.o : %.c $(INCLUDES)
-	$(CC) $(CFLAGS) -Imlx -c $< -o $@ -I./
+	$(CC) $(CFLAGS) -c $< -o $@ -I./
 
 $(NAME) : $(A_OBJS)
-	@make -C $(LIBFT) 
-	$(CC) $(CFLAGS) -o $@ $^ -L $(LIBFT) -lft
+	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY : clean
 clean :
 	$(RM) $(RMFLAGS) $(OBJS) $(OBJS_BONUS)
-	@make clean -C $(LIBFT)
 
 .PHONY : fclean
 fclean : clean
 	$(RM) $(RMFLAGS) $(NAME)
-	@make fclean -C $(LIBFT)
 
 .PHONY : re
 re:
