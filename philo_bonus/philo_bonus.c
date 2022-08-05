@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 00:30:33 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/03 20:34:00 by yichoi           ###   ########.fr       */
+/*   Created: 2022/08/03 18:30:22 by yichoi            #+#    #+#             */
+/*   Updated: 2022/08/03 18:30:24 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo_bonus.h"
 
-# include <string.h>	// memset, 
-# include <stdio.h>		// printf
-# include <stdlib.h>	// malloc, free
-# include <unistd.h>	// write, usleep
-# include <sys/time.h>	// gettimeofday
-# include <pthread.h>	// pthread_create, _detach, _join, _mutex_init, mutex_destroy, mutex_lock, mutex_unlock
-
-
-#endif
+int	main(int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	printf("test makefile_bonus\n");
+	return (0);
+}

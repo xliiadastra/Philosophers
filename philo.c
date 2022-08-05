@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:12:08 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/02 22:12:09 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/03 18:29:16 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	main(int argc, char *argv[])
 {
+	(void)argc;
+	(void)argv;
+	printf("test makefile\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 15:18:40 by yichoi            #+#    #+#              #
-#    Updated: 2022/08/02 22:11:18 by yichoi           ###   ########.fr        #
+#    Updated: 2022/08/03 18:30:55 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ RMFLAGS		= -f
 INCLUDES	= ./philo.h 				\
 			  ./philo_bonus.h
 
-SRCS		=	
+SRCS		=	philo.c
 
-SRCS_BN		=	
+SRCS_BN		=	./philo_bonus/philo_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 
