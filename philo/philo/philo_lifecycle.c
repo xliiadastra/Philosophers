@@ -83,7 +83,8 @@ int	sleep_thinking(t_philo *philo, t_arg *arg)
 	if (kill_)
 		return (ERROR);
 	philo_print(philo, philo->info, philo->idx, "is sleeping");
-	smart_timer(arg->sleep_time);
+	if (smart_timer(arg->sleep_time))
+		return (ERROR);
 	philo_print(philo, philo->info, philo->idx, "is thinking");
 	return (SUCCESS);
 }
@@ -97,7 +98,8 @@ void	*action(void *param)
 	philo->last_eat_t = get_time();
 	pthread_mutex_unlock(&philo->info->mutex.print);
 	if (philo->idx % 2 != 0)
-		smart_timer(philo->info->arg.eat_time / 2);
+		if (smart_timer(philo->info->arg.eat_time / 2))
+			return (NULL);
 	while (!take_fork(philo)
 		&& !eating(philo, &philo->info->arg)
 		&& !sleep_thinking(philo, &philo->info->arg));

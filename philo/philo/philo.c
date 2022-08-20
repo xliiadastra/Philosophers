@@ -60,5 +60,7 @@ int	main(int argc, char *argv[])
 	while (++i < philo->info->arg.n_philo)
 		pthread_join(philo[i].tid, NULL);
 	mutex_free(philo);
+	free(philo);
+	system("leaks philo");
 	return (0);
 }

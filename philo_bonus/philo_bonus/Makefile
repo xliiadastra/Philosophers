@@ -1,15 +1,11 @@
 CC = cc
 
-NAME = philo
+NAME = philo_bonus
 
 CFLAGS = -Wall -Werror -Wextra
-#CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
+# CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
 
-SRCS =	philo.c 			\
-		philo_utils.c		\
-		philo_input.c		\
-		philo_timer.c		\
-		philo_lifecycle.c
+SRCS = philo_bonus.c ft_atoi.c
 
 OBJS = $(SRCS:.c=.o)
 
