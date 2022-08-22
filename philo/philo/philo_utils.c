@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:52:55 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/19 18:12:06 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/22 17:08:23 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	mutex_free(t_philo *philo)
 	int	i;
 
 	i = -1;
+	free(philo[0].left);
 	while (++i < philo->info->arg.n_philo)
 		pthread_mutex_destroy(philo[i].left);
 	pthread_mutex_destroy(&philo->info->mutex.print);
