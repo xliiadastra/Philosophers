@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   philo_bonus_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:52:55 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/19 18:12:06 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/23 21:33:21 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	ft_error(void)
 {
@@ -22,11 +22,20 @@ int	ft_error(void)
 
 int	ft_fail(t_philo *philo)
 {
-	philo->info->stat.death++;
 	printf("Error has occureed.\n");
 	free(philo);
 	philo = NULL;
 	return (ERROR);
+}
+
+void	sem_free(t_philo *philo)
+{
+	sem_close(philo->info->sama->fork);
+	sem_closw(philo->info->sama->print);
+	sem_unlink("sem_fork");
+	sem_unlink("sem_print");
+	free(pid);
+	pid = NULL;
 }
 
 int	ft_isstrdigit(char *str)
@@ -40,16 +49,6 @@ int	ft_isstrdigit(char *str)
 	if (ft_atol(str) > INT_MAX)
 		return (ERROR);
 	return (SUCCESS);
-}
-
-void	mutex_free(t_philo *philo)
-{
-	int	i;
-
-	i = -1;
-	while (++i < philo->info->arg.n_philo)
-		pthread_mutex_destroy(philo[i].left);
-	pthread_mutex_destroy(&philo->info->mutex.print);
 }
 
 unsigned long long	ft_atol(const char *str)

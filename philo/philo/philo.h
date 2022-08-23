@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:15 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/19 18:01:53 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:16:48 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_philo
 	pthread_mutex_t	*right;
 }	t_philo;
 
-enum e_enum
+typedef enum e_enum
 {
 	SUCCESS,
 	ERROR

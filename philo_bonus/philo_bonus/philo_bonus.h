@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 20:37:31 by yichoi            #+#    #+#             */
+/*   Updated: 2022/08/23 20:51:03 by yichoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -10,8 +22,7 @@
 # include <pthread.h>
 # include <signal.h>
 
-# define INT_MAX			2147483647
-# define INT_MIN			-2147483648
+# define INT_MAX 2147483647ULL
 
 // typedef struct s_status
 // {
@@ -52,11 +63,34 @@ typedef struct s_philo
 	int		eat_cnt;
 }	t_philo;
 
-enum e_enum
+typedef enum e_status
 {
-	ERROR = -1,
-	SUCCESS
-};
+	SUCCESS,
+	ERROR
+}	t_status;
+
+
 
 long long	ft_atoi(const	char	*str);
+int	ft_error(void);
+int	ft_fail(t_philo *philo);
+int	ft_isstrdigit(char *str);
+void	mutex_free(t_philo *philo);
+unsigned long long	ft_atol(const char *str);
+int	ft_strstr(char *str1, char *str2);
+size_t  get_time();
+int    smart_timer(size_t time);
+int	check_input(int argc, char *argv[]);
+int	parse_arg(int argc, char **argv, t_info *info);
+int	init_philo(t_philo *philo, t_info *info, t_arg *arg);
+void	philo_print(t_philo *philo, t_info *info, int idx, char *str);
+int take_fork(t_philo *philo);
+int	eating(t_philo *philo);
+int	sleep_thinking(t_philo *philo);
+void action(t_philo philo);
+void	*monitor(void *param);
+void *eat_checker(void *param);
+
+
+
 #endif

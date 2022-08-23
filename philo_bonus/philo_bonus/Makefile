@@ -1,11 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/08/23 21:07:58 by yichoi            #+#    #+#              #
+#    Updated: 2022/08/23 21:12:24 by yichoi           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 
 NAME = philo_bonus
 
 CFLAGS = -Wall -Werror -Wextra
-# CFLAGS = -Wall -Werror -Wextra -g -fsanitize=thread
 
-SRCS = philo_bonus.c ft_atoi.c
+SRCS = philo_bonus.c				\
+	   philo_bonus_utils.c			\
+	   philo_bonus_input.c			\
+	   philo_bonus_timer.c			\
+	   philo_bonus_lifecycle.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,13 +37,6 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-
-debug: all
-	$(CC) -lpthread $(OBJS) -o $(NAME)
-#$(CC) -lpthread $(OBJS) -o $(NAME) -fsanitize=address
-
-lldb: all
-	$(CC) $(CFLAGS) -lpthread $(SRCS) -o $(NAME) -g3
 
 re:
 	make fclean
