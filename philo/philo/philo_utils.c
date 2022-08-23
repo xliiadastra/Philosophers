@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:52:55 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/22 17:08:23 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:10:33 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,4 @@ unsigned long long	ft_atol(const char *str)
 	while (str[++i])
 		result = result * 10 + str[i] - '0';
 	return (result);
-}
-
-int	ft_strstr(char *str1, char *str2)
-{
-	int	i;
-
-	i = -1;
-	while (str1[++i])
-		if (str1[i] != str2[i])
-			return (0);
-	if (str1[i] == '\0' && str2[i] == '\0')
-		return (1);
-	else
-		return (0);
 }
