@@ -6,7 +6,7 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/23 20:09:41 by yichoi            #+#    #+#              #
-#    Updated: 2022/08/23 20:09:42 by yichoi           ###   ########.fr        #
+#    Updated: 2022/08/23 20:12:03 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ CC = cc
 NAME = philo
 
 CFLAGS = -Wall -Werror -Wextra
-#CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 
 SRCS =	philo.c 			\
 		philo_utils.c		\
@@ -39,12 +38,11 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-debug: all
-	$(CC) -lpthread $(OBJS) -o $(NAME)
-#$(CC) -lpthread $(OBJS) -o $(NAME) -fsanitize=address
+#debug: all
+#	$(CC) -lpthread $(OBJS) -o $(NAME)
 
-lldb: all
-	$(CC) $(CFLAGS) -lpthread $(SRCS) -o $(NAME) -g3
+#lldb: all
+#	$(CC) $(CFLAGS) -lpthread $(SRCS) -o $(NAME) -g3
 
 re:
 	make fclean

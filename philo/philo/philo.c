@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:52:42 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/22 17:08:34 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/23 20:11:13 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int	main(int argc, char *argv[])
 		pthread_join(philo[i].tid, NULL);
 	mutex_free(philo);
 	free(philo);
-	system("leaks philo");
 	return (0);
 }
