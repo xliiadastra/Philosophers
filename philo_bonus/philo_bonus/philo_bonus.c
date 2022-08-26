@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/26 16:44:32 by yichoi            #+#    #+#             */
+/*   Updated: 2022/08/26 18:52:39 by yichoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
 void *eat_checker(void *param)
@@ -17,9 +29,8 @@ void *eat_checker(void *param)
 	i = -1;
 	while (++i < philo->info.arg.n_philo)
 		kill(philo->info.pid[i], SIGKILL);
-    // sem_post(philo->info.sema.print);			// 세마포어 종료 및 할당한 자원 해제
-    sem_close(philo->info.sema.eat_checker);			// 세마포어 종료 및 할당한 자원 해제
-	sem_unlink("eat_checker"); 							// 세마포어 객체 해제 제거
+    sem_close(philo->info.sema.eat_checker);
+	sem_unlink("eat_checker");
 	return (NULL);
 }
 
@@ -28,7 +39,6 @@ void	*monitor(void *param)
 	size_t	now_t;
 
 	t_philo	*const philo  = (t_philo *)param;
-	
 	while (1)
 	{
 		sem_wait(philo->info.sema.print);
@@ -43,22 +53,11 @@ void	*monitor(void *param)
 	return (NULL);
 }
 
-int	main(int argc, char *argv[])
+void	philo_fork(t_philo philo, pid_t *pid)
 {
-	int			idx;
-	pid_t		*pid;
-	t_philo		philo;
-	pthread_t	tid_eatchecker;
+	int	idx;
 
-	memset(&philo, 0, sizeof(t_philo));
-	if (check_input(argc, argv) || parse_arg(argc, argv, &philo.info))
-		return (ERROR);
-	pid = malloc(sizeof(pid_t) * philo.info.arg.n_philo);
-	if (init_philo(&philo, &philo.info, &philo.info.arg))
-		return (ERROR);
 	idx = 0;
-
-	philo.info.birth_t = get_time();
 	while (idx < philo.info.arg.n_philo)
 	{
 		pid[idx] = fork();
@@ -66,6 +65,34 @@ int	main(int argc, char *argv[])
 			action(philo);
 		philo.idx = ++idx;
 	}
+}
+
+void	kill_dem_all(t_philo *philo, pid_t *pid)
+{
+	int	idx;
+
+	idx = -1;
+	while (++idx < philo->info.arg.n_philo)
+		kill(pid[idx], SIGKILL);
+	sem_or_pid_free(philo, pid);
+	while (idx--)
+		waitpid(-1, 0, 0);
+}
+
+int	main(int argc, char *argv[])
+{
+	pid_t		*pid;
+	t_philo		philo;
+	pthread_t	tid_eatchecker;
+
+	memset(&philo, 0, sizeof(t_philo));
+	if (check_input(argc, argv) || parse_arg(argc, argv, &philo.info))
+		return (ft_error());
+	pid = malloc(sizeof(pid_t) * philo.info.arg.n_philo);
+	if (init_philo(&philo.info, &philo.info.arg))
+		return (ft_fail(pid));
+	philo.info.birth_t = get_time();
+	philo_fork(philo, pid);
 	philo.info.pid = pid;
 	if (argc == 6)
 	{
@@ -73,12 +100,6 @@ int	main(int argc, char *argv[])
 		pthread_detach(tid_eatchecker);
 	}
 	waitpid(-1, 0, 0);
-	idx = -1;
-	while (++idx < philo.info.arg.n_philo)
-		kill(pid[idx], SIGKILL);
-	sem_free(&philo);
-	free(pid);
-	while (idx--)
-		waitpid(-1, 0, 0);
+	kill_dem_all(&philo, pid);
 	return (0);
 }

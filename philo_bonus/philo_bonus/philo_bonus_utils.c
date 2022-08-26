@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:52:55 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:33:21 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 17:26:19 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	ft_error(void)
 	return (1);
 }
 
-int	ft_fail(t_philo *philo)
+int	ft_fail(pid_t *pid)
 {
 	printf("Error has occureed.\n");
-	free(philo);
-	philo = NULL;
+	free(pid);
+	pid = NULL;
 	return (ERROR);
 }
 
-void	sem_free(t_philo *philo)
+void	sem_or_pid_free(t_philo *philo, pid_t *pid)
 {
-	sem_close(philo->info->sama->fork);
-	sem_closw(philo->info->sama->print);
+	sem_close(philo->info.sema.fork);
+	sem_close(philo->info.sema.print);
 	sem_unlink("sem_fork");
 	sem_unlink("sem_print");
 	free(pid);

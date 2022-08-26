@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:26:43 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 20:33:25 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 17:54:40 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,19 @@ int	parse_arg(int argc, char **argv, t_info *info)
 	return (SUCCESS);
 }
 
-int	init_philo(t_philo *philo, t_info *info, t_arg *arg)
+int	init_philo(t_info *info, t_arg *arg)
 {
-	(*philo).last_eat_t = get_time();
+	sem_unlink("sem_fork");
 	info->sema.fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644, arg->n_philo);
 	if (info->sema.fork == SEM_FAILED)
-	{
-		sem_unlink("sem_fork");
-		info->sema.fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644, arg->n_philo);
-	}
+		return (ERROR);
+	sem_unlink("sem_print");
 	info->sema.print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
 	if (info->sema.print == SEM_FAILED)
-	{
-		sem_unlink("sem_print");
-		info->sema.print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
-	}
+		return (ERROR);
+	sem_unlink("eat_checker");
 	info->sema.eat_checker = sem_open("eat_checker", O_CREAT | O_EXCL, 0644, 0);
 	if (info->sema.eat_checker == SEM_FAILED)
-	{
-		sem_unlink("eat_checker");
-		info->sema.eat_checker = sem_open("eat_checker", O_CREAT | O_EXCL, 0644, 0);
-	}
+		return (ERROR);
 	return (SUCCESS);
 }

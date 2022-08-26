@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:57:15 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 20:16:48 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 16:35:52 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef enum e_enum
 {
 	SUCCESS,
 	ERROR
-};
+}	t_enum;
 
 int					ft_error(void);
 int					ft_fail(t_philo *philo);

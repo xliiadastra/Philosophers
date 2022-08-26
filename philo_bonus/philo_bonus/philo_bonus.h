@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:37:31 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 20:51:03 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 18:51:11 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 # include <signal.h>
 
 # define INT_MAX 2147483647ULL
-
-// typedef struct s_status
-// {
-// 	int	end;
-// 	int	n_full;
-// }	t_status;
 
 typedef struct s_sem
 {
@@ -52,7 +46,6 @@ typedef struct s_info
 	t_sem		sema;
 	size_t		birth_t;
 	pid_t		*pid;
-	// t_status 	stat;
 }	t_info;
 
 typedef struct s_philo
@@ -73,7 +66,7 @@ typedef enum e_status
 
 long long	ft_atoi(const	char	*str);
 int	ft_error(void);
-int	ft_fail(t_philo *philo);
+int	ft_fail(pid_t *pid);
 int	ft_isstrdigit(char *str);
 void	mutex_free(t_philo *philo);
 unsigned long long	ft_atol(const char *str);
@@ -82,7 +75,8 @@ size_t  get_time();
 int    smart_timer(size_t time);
 int	check_input(int argc, char *argv[]);
 int	parse_arg(int argc, char **argv, t_info *info);
-int	init_philo(t_philo *philo, t_info *info, t_arg *arg);
+int	init_philo(t_info *info, t_arg *arg);
+void	philo_fork(t_philo philo, pid_t *pid);
 void	philo_print(t_philo *philo, t_info *info, int idx, char *str);
 int take_fork(t_philo *philo);
 int	eating(t_philo *philo);
@@ -90,7 +84,7 @@ int	sleep_thinking(t_philo *philo);
 void action(t_philo philo);
 void	*monitor(void *param);
 void *eat_checker(void *param);
-
-
+void	sem_or_pid_free(t_philo *philo, pid_t *pid);
+void	kill_dem_all(t_philo *philo, pid_t *pid);
 
 #endif
