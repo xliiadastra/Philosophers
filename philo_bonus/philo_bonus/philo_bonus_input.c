@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:26:43 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/26 17:54:40 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 18:54:05 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ int	init_philo(t_info *info, t_arg *arg)
 	if (info->sema.eat_checker == SEM_FAILED)
 		return (ERROR);
 	return (SUCCESS);
+}
+
+void	sem_or_pid_free(t_philo *philo, pid_t *pid)
+{
+	sem_close(philo->info.sema.fork);
+	sem_close(philo->info.sema.print);
+	sem_unlink("sem_fork");
+	sem_unlink("sem_print");
+	free(pid);
+	pid = NULL;
 }
