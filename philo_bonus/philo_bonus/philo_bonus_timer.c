@@ -6,13 +6,13 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:38:20 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 20:51:41 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 18:55:03 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-size_t  get_time()
+size_t	get_time(void)
 {
 	struct timeval	time;
 

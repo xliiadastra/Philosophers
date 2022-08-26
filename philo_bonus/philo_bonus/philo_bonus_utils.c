@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:52:55 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/26 18:54:13 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 19:10:07 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_isstrdigit(char *str)
 	int	i;
 
 	i = -1;
+	if (str[0] == '+')
+		i = 0;
 	while (str[++i])
 		if ('0' > str[i] || str[i] > '9')
 			return (ERROR);
@@ -48,6 +50,8 @@ unsigned long long	ft_atol(const char *str)
 
 	i = -1;
 	result = 0;
+	if (str[0] == '+')
+		i = 0;
 	while (str[++i])
 		result = result * 10 + str[i] - '0';
 	return (result);

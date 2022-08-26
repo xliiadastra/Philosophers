@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:36:31 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/23 21:28:16 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 18:55:41 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	philo_print(t_philo *philo, t_info *info, int idx, char *str)
 	sem_post(philo->info.sema.print);
 }
 
-int take_fork(t_philo *philo)
+int	take_fork(t_philo *philo)
 {
 	sem_wait(philo->info.sema.fork);
 	philo_print(philo, &philo->info, philo->idx, "has taken a fork");
@@ -56,7 +56,7 @@ int	sleep_thinking(t_philo *philo)
 	return (SUCCESS);
 }
 
-void action(t_philo philo)
+void	action(t_philo philo)
 {
 	pthread_t	tid;
 
@@ -64,7 +64,7 @@ void action(t_philo philo)
 	philo.last_eat_t = get_time();
 	pthread_create(&tid, NULL, monitor, &philo);
 	while (!take_fork(&philo)
-			&& !eating(&philo)
-			&& !sleep_thinking(&philo));
+		&& !eating(&philo)
+		&& !sleep_thinking(&philo));
 	exit(1);
 }

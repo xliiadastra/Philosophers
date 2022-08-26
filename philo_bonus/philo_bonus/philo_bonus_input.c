@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 20:26:43 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/26 18:54:05 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 18:56:17 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	parse_arg(int argc, char **argv, t_info *info)
 int	init_philo(t_info *info, t_arg *arg)
 {
 	sem_unlink("sem_fork");
-	info->sema.fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644, arg->n_philo);
+	info->sema.fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644,
+			arg->n_philo);
 	if (info->sema.fork == SEM_FAILED)
 		return (ERROR);
 	sem_unlink("sem_print");

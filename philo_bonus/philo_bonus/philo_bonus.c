@@ -6,13 +6,13 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:44:32 by yichoi            #+#    #+#             */
-/*   Updated: 2022/08/26 18:52:39 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/08/26 19:05:45 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void *eat_checker(void *param)
+void	*eat_checker(void *param)
 {
 	int		i;
 	t_philo	*philo;
@@ -24,12 +24,12 @@ void *eat_checker(void *param)
 		sem_wait(philo->info.sema.eat_checker);
 		if (i + 1 == philo->info.arg.n_philo)
 			break ;
-    	sem_post(philo->info.sema.print);
+		sem_post(philo->info.sema.print);
 	}
 	i = -1;
 	while (++i < philo->info.arg.n_philo)
 		kill(philo->info.pid[i], SIGKILL);
-    sem_close(philo->info.sema.eat_checker);
+	sem_close(philo->info.sema.eat_checker);
 	sem_unlink("eat_checker");
 	return (NULL);
 }
@@ -37,15 +37,17 @@ void *eat_checker(void *param)
 void	*monitor(void *param)
 {
 	size_t	now_t;
+	t_philo	*philo;
 
-	t_philo	*const philo  = (t_philo *)param;
+	philo = (t_philo *)param;
 	while (1)
 	{
 		sem_wait(philo->info.sema.print);
 		now_t = get_time();
 		if (now_t > philo->info.arg.die_time + philo->last_eat_t)
 		{
-			printf("%ld %d died\n", now_t - (*philo).info.birth_t, philo->idx + 1);
+			printf("%ld %d died\n", now_t - (*philo).info.birth_t,
+				philo->idx + 1);
 			exit(1);
 		}
 		sem_post(philo->info.sema.print);
